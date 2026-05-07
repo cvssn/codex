@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx next *)",
+      "Bash(curl -s -o NUL -w \"home:%%{http_code}\\\\n\" http://localhost:4317/)",
+      "Bash(curl -s -o NUL -w \"entry:%%{http_code}\\\\n\" http://localhost:4317/entry/zod-4-migration)",
+      "Bash(curl -s -o NUL -w \"404:%%{http_code}\\\\n\" http://localhost:4317/entry/does-not-exist)",
+      "PowerShell($h = \\(Invoke-WebRequest -UseBasicParsing http://localhost:4317/\\).StatusCode; $e = \\(Invoke-WebRequest -UseBasicParsing http://localhost:4317/entry/zod-4-migration\\).StatusCode; \"home=$h entry=$e\")",
+      "PowerShell($r = Invoke-WebRequest -UseBasicParsing http://localhost:4317/; $r.Content.Substring\\(0, [Math]::Min\\(2500, $r.Content.Length\\)\\))",
+      "Bash(npx kill-port *)",
+      "PowerShell(Start-Sleep 4; $r = Invoke-WebRequest -UseBasicParsing http://localhost:4317/; if \\($r.Content -match 'last updated </span><span>\\([^<]+\\)</span>'\\) { \"last_updated=$\\($matches[1]\\)\" }; if \\($r.Content -match '>\\(\\\\d+\\)</span><span> entries'\\) { \"total=$\\($matches[1]\\)\" })"
+    ]
+  }
+}
