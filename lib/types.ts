@@ -1,10 +1,4 @@
-export type Category =
-  | "guide"
-  | "note"
-  | "resource"
-  | "technology"
-  | "study"
-  | "idea";
+export type Category = "guide" | "note" | "resource" | "technology" | "study" | "idea";
 
 export const CATEGORIES: { key: Category; plural: string; glyph: string }[] = [
   { key: "guide", plural: "guides", glyph: "◆" },

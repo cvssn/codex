@@ -69,7 +69,9 @@ export default function SettingsPanel() {
     applyToDom(settings);
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-    } catch {}
+    } catch {
+      // localStorage unavailable (private mode, quota) — settings persist for session only
+    }
   }, [settings, mounted]);
 
   useEffect(() => {
@@ -94,7 +96,7 @@ export default function SettingsPanel() {
         type="button"
         aria-label="open settings"
         onClick={() => setOpen(true)}
-        className="fixed top-5 right-5 z-30 w-9 h-9 flex items-center justify-center rounded-[2px] border border-[var(--color-line)] bg-[var(--color-paper-soft)] text-[var(--color-muted)] hover:text-[var(--color-ink)] hover:border-[var(--color-ink-soft)] transition-colors"
+        className="fixed top-5 right-5 z-30 flex h-9 w-9 items-center justify-center rounded-[2px] border border-[var(--color-line)] bg-[var(--color-paper-soft)] text-[var(--color-muted)] transition-colors hover:border-[var(--color-ink-soft)] hover:text-[var(--color-ink)]"
       >
         <span className="text-[15px] select-none" data-keep-case>
           ⚙
@@ -102,46 +104,41 @@ export default function SettingsPanel() {
       </button>
 
       {open && (
-        <div
-          className="fixed inset-0 z-40 fade"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setOpen(false);
-          }}
-        >
-          <div
-            className="absolute inset-0"
+        <div className="fade fixed inset-0 z-40">
+          <button
+            type="button"
+            aria-label="close settings"
+            onClick={() => setOpen(false)}
+            className="absolute inset-0 cursor-default"
             style={{ backgroundColor: "rgba(26,24,20,0.35)" }}
           />
           <aside
             role="dialog"
+            aria-modal="true"
             aria-label="settings"
-            className="absolute top-0 right-0 h-full w-full max-w-[380px] border-l border-[var(--color-ink-soft)] flex flex-col"
+            className="absolute top-0 right-0 flex h-full w-full max-w-[380px] flex-col border-l border-[var(--color-ink-soft)]"
             style={{
               backgroundColor: "var(--color-paper-raised)",
               boxShadow: "-24px 0 48px -16px rgba(26,24,20,0.45)",
             }}
           >
-            <header className="flex items-center justify-between px-6 py-5 border-b border-[var(--color-line)]">
+            <header className="flex items-center justify-between border-b border-[var(--color-line)] px-6 py-5">
               <div className="flex items-baseline gap-3">
-                <span className="text-[11px] tracking-[0.22em] text-[var(--color-muted)]">
-                  §
-                </span>
-                <h2 className="text-[14px] tracking-[0.18em] text-[var(--color-ink)]">
-                  settings
-                </h2>
+                <span className="text-[11px] tracking-[0.22em] text-[var(--color-muted)]">§</span>
+                <h2 className="text-[14px] tracking-[0.18em] text-[var(--color-ink)]">settings</h2>
               </div>
               <button
                 type="button"
                 aria-label="close settings"
                 onClick={() => setOpen(false)}
-                className="text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors text-sm"
+                className="text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
                 data-keep-case
               >
                 esc ×
               </button>
             </header>
 
-            <div className="flex-1 overflow-y-auto px-6 py-6 space-y-8">
+            <div className="flex-1 space-y-8 overflow-y-auto px-6 py-6">
               <Group label="appearance">
                 <Row label="theme" hint="paper is light. ink is dark.">
                   <Segmented
@@ -193,10 +190,7 @@ export default function SettingsPanel() {
               </Group>
 
               <Group label="accessibility">
-                <Row
-                  label="motion"
-                  hint="reduced disables rise and fade animations."
-                >
+                <Row label="motion" hint="reduced disables rise and fade animations.">
                   <Segmented
                     value={settings.motion}
                     onChange={(v) => update("motion", v as Motion)}
@@ -207,10 +201,7 @@ export default function SettingsPanel() {
                   />
                 </Row>
 
-                <Row
-                  label="contrast"
-                  hint="high boosts ink and hairline contrast."
-                >
+                <Row label="contrast" hint="high boosts ink and hairline contrast.">
                   <Segmented
                     value={settings.contrast}
                     onChange={(v) => update("contrast", v as Contrast)}
@@ -227,7 +218,7 @@ export default function SettingsPanel() {
                   <button
                     type="button"
                     onClick={reset}
-                    className="px-3 py-1.5 text-[12px] tracking-[0.12em] border border-[var(--color-line)] text-[var(--color-ink-soft)] hover:border-[var(--color-ink-soft)] hover:text-[var(--color-ink)] transition-colors rounded-[2px]"
+                    className="rounded-[2px] border border-[var(--color-line)] px-3 py-1.5 text-[12px] tracking-[0.12em] text-[var(--color-ink-soft)] transition-colors hover:border-[var(--color-ink-soft)] hover:text-[var(--color-ink)]"
                   >
                     restore defaults
                   </button>
@@ -235,7 +226,7 @@ export default function SettingsPanel() {
               </Group>
             </div>
 
-            <footer className="px-6 py-4 border-t border-[var(--color-line)] text-[10px] tracking-[0.18em] text-[var(--color-muted)] flex items-baseline justify-between">
+            <footer className="flex items-baseline justify-between border-t border-[var(--color-line)] px-6 py-4 text-[10px] tracking-[0.18em] text-[var(--color-muted)]">
               <span>§ saved locally</span>
               <span data-keep-case>codex</span>
             </footer>
@@ -246,20 +237,12 @@ export default function SettingsPanel() {
   );
 }
 
-function Group({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+function Group({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <section>
       <div className="flex items-center gap-3">
-        <span className="text-[10px] tracking-[0.22em] text-[var(--color-muted)]">
-          {label}
-        </span>
-        <span className="flex-1 h-px bg-[var(--color-line)]" />
+        <span className="text-[10px] tracking-[0.22em] text-[var(--color-muted)]">{label}</span>
+        <span className="h-px flex-1 bg-[var(--color-line)]" />
       </div>
       <div className="mt-4 space-y-5">{children}</div>
     </section>
@@ -282,9 +265,7 @@ function Row({
         {children}
       </div>
       {hint && (
-        <span className="text-[11px] text-[var(--color-muted)] leading-relaxed">
-          {hint}
-        </span>
+        <span className="text-[11px] leading-relaxed text-[var(--color-muted)]">{hint}</span>
       )}
     </div>
   );
@@ -300,7 +281,7 @@ function Segmented({
   options: { value: string; label: string }[];
 }) {
   return (
-    <div className="inline-flex border border-[var(--color-line)] rounded-[2px] overflow-hidden">
+    <div className="inline-flex overflow-hidden rounded-[2px] border border-[var(--color-line)]">
       {options.map((opt, i) => {
         const active = opt.value === value;
         return (

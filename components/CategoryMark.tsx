@@ -82,11 +82,7 @@ function glyphFor(cat: string): string {
   return CATEGORIES.find((c) => c.key === cat)?.glyph ?? "·";
 }
 
-export default function CategoryMark({
-  category,
-  className = "",
-  size = 14,
-}: Props) {
+export default function CategoryMark({ category, className = "", size = 14 }: Props) {
   return (
     <span className={`category-mark inline-flex items-center justify-center ${className}`}>
       <span className="mark-glyph" aria-hidden>

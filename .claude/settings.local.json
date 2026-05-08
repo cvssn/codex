@@ -15,7 +15,10 @@
       "Bash(npm run *)",
       "Bash(curl *)",
       "Bash(kill bhjhapb7l *)",
-      "Bash(vercel --version)"
+      "Bash(vercel --version)",
+      "Bash(npx prettier *)",
+      "Bash(npx eslint *)",
+      "Bash(npm ls *)"
     ]
   }
 }

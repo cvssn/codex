@@ -31,7 +31,7 @@ export default function SearchBar({ entries }: Props) {
         includeMatches: false,
         minMatchCharLength: 2,
       }),
-    [entries]
+    [entries],
   );
 
   const results = useMemo(() => {
@@ -84,7 +84,7 @@ export default function SearchBar({ entries }: Props) {
   return (
     <div ref={containerRef} className="relative">
       <label className="flex items-center gap-3 border-b border-[var(--color-line)] pb-3 transition-colors focus-within:border-[var(--color-ink)]">
-        <span className="text-[var(--color-muted)] text-sm select-none">⌕</span>
+        <span className="text-sm text-[var(--color-muted)] select-none">⌕</span>
         <input
           ref={inputRef}
           value={query}
@@ -101,17 +101,19 @@ export default function SearchBar({ entries }: Props) {
         />
         <kbd
           data-keep-case
-          className="hidden md:inline text-[10px] tracking-[0.16em] text-[var(--color-muted)] border border-[var(--color-line)] px-1.5 py-0.5 rounded-[2px]"
+          className="hidden rounded-[2px] border border-[var(--color-line)] px-1.5 py-0.5 text-[10px] tracking-[0.16em] text-[var(--color-muted)] md:inline"
         >
           ⌘K
         </kbd>
       </label>
 
       {open && query.trim().length > 0 && (
-        <div className="absolute left-0 right-0 top-full mt-3 border border-[var(--color-ink-soft)] bg-[#fbf7ec] shadow-[0_24px_48px_-16px_rgba(26,24,20,0.55)] z-50 fade"
-             style={{ backgroundColor: "#fbf7ec", opacity: 1 }}>
+        <div
+          className="fade absolute top-full right-0 left-0 z-50 mt-3 border border-[var(--color-ink-soft)] bg-[#fbf7ec] shadow-[0_24px_48px_-16px_rgba(26,24,20,0.55)]"
+          style={{ backgroundColor: "#fbf7ec", opacity: 1 }}
+        >
           {results.length === 0 ? (
-            <div className="px-5 py-6 text-sm text-[var(--color-muted)] flex items-center gap-3">
+            <div className="flex items-center gap-3 px-5 py-6 text-sm text-[var(--color-muted)]">
               <span>·</span>
               <span>nothing matches “{query}”</span>
             </div>
@@ -128,12 +130,10 @@ export default function SearchBar({ entries }: Props) {
                         : "hover:bg-[#e6e0d2]"
                     }`}
                   >
-                    <span className="text-[var(--color-muted)] w-4 text-center select-none">
+                    <span className="w-4 text-center text-[var(--color-muted)] select-none">
                       <CategoryMark category={r.category} size={14} />
                     </span>
-                    <span className="flex-1 truncate text-[14px]">
-                      {r.title}
-                    </span>
+                    <span className="flex-1 truncate text-[14px]">{r.title}</span>
                     <span className="text-[11px] tracking-[0.12em] text-[var(--color-muted)]">
                       {r.category}
                     </span>
@@ -142,7 +142,7 @@ export default function SearchBar({ entries }: Props) {
               ))}
             </ul>
           )}
-          <div className="px-5 py-2 border-t border-[var(--color-line-soft)] flex items-center justify-between text-[10px] tracking-[0.16em] text-[var(--color-muted)]">
+          <div className="flex items-center justify-between border-t border-[var(--color-line-soft)] px-5 py-2 text-[10px] tracking-[0.16em] text-[var(--color-muted)]">
             <span data-keep-case>↑↓ navigate</span>
             <span data-keep-case>↵ open</span>
             <span data-keep-case>esc close</span>

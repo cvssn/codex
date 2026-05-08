@@ -10,11 +10,7 @@ import type { Category, Entry, EntryMeta } from "./types";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
-const processor = unified()
-  .use(remarkParse)
-  .use(remarkGfm)
-  .use(remarkRehype)
-  .use(rehypeStringify);
+const processor = unified().use(remarkParse).use(remarkGfm).use(remarkRehype).use(rehypeStringify);
 
 function listMarkdownFiles(dir: string): string[] {
   if (!fs.existsSync(dir)) return [];

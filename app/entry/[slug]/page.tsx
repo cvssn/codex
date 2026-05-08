@@ -8,8 +8,18 @@ export async function generateStaticParams() {
 }
 
 const MONTHS_LONG = [
-  "january", "february", "march", "april", "may", "june",
-  "july", "august", "september", "october", "november", "december",
+  "january",
+  "february",
+  "march",
+  "april",
+  "may",
+  "june",
+  "july",
+  "august",
+  "september",
+  "october",
+  "november",
+  "december",
 ];
 
 function fmtDate(iso: string): string {
@@ -21,11 +31,7 @@ function fmtDate(iso: string): string {
   return `${parseInt(d, 10)} ${month} ${y}`;
 }
 
-export default async function EntryPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function EntryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const entry = await getEntryBySlug(slug);
   if (!entry) notFound();
@@ -35,7 +41,7 @@ export default async function EntryPage({
       <nav className="flex items-baseline justify-between text-[11px] tracking-[0.18em] text-[var(--color-muted)]">
         <Link
           href="/"
-          className="hover:text-[var(--color-seal)] transition-colors flex items-center gap-2"
+          className="flex items-center gap-2 transition-colors hover:text-[var(--color-seal)]"
         >
           <span className="select-none">←</span>
           <span>codex</span>
@@ -45,7 +51,7 @@ export default async function EntryPage({
 
       <hr className="mt-3 border-0 border-t border-[var(--color-line)]" />
 
-      <article className="mt-14 rise">
+      <article className="rise mt-14">
         <div className="flex items-center gap-3 text-[11px] tracking-[0.16em] text-[var(--color-muted)]">
           <span className="text-[var(--color-seal)] select-none">
             <CategoryMark category={entry.category} size={14} />
@@ -55,7 +61,7 @@ export default async function EntryPage({
           <span>{fmtDate(entry.date)}</span>
         </div>
 
-        <h1 className="mt-5 text-[40px] leading-[1.1] tracking-[-0.02em] font-medium">
+        <h1 className="mt-5 text-[40px] leading-[1.1] font-medium tracking-[-0.02em]">
           {entry.title}
         </h1>
 
@@ -81,8 +87,8 @@ export default async function EntryPage({
         />
       </article>
 
-      <footer className="mt-24 pt-6 border-t border-[var(--color-line)] flex items-baseline justify-between text-[10px] tracking-[0.18em] text-[var(--color-muted)]">
-        <Link href="/" className="hover:text-[var(--color-seal)] transition-colors">
+      <footer className="mt-24 flex items-baseline justify-between border-t border-[var(--color-line)] pt-6 text-[10px] tracking-[0.18em] text-[var(--color-muted)]">
+        <Link href="/" className="transition-colors hover:text-[var(--color-seal)]">
           ← index
         </Link>
         <span>§ codex</span>

@@ -106,12 +106,12 @@ categories are denoted by single glyphs (◆ ▢ ◇ ◯ ▲ ✦) instead of ico
 
 ### keyboard
 
-| key      | action                |
-| -------- | --------------------- |
-| `cmd+k`  | focus search          |
-| `↑ ↓`    | navigate results      |
-| `↵`      | open selected entry   |
-| `esc`    | close search          |
+| key     | action              |
+| ------- | ------------------- |
+| `cmd+k` | focus search        |
+| `↑ ↓`   | navigate results    |
+| `↵`     | open selected entry |
+| `esc`   | close search        |
 
 ---
 

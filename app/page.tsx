@@ -5,8 +5,18 @@ import { getAllMeta, getCountsByCategory } from "@/lib/content";
 import { CATEGORIES } from "@/lib/types";
 
 const MONTHS_SHORT = [
-  "jan", "feb", "mar", "apr", "may", "jun",
-  "jul", "aug", "sep", "oct", "nov", "dec",
+  "jan",
+  "feb",
+  "mar",
+  "apr",
+  "may",
+  "jun",
+  "jul",
+  "aug",
+  "sep",
+  "oct",
+  "nov",
+  "dec",
 ];
 
 function fmtDate(iso: string): string {
@@ -34,12 +44,10 @@ export default function Home() {
         </div>
         <hr className="mt-3 border-0 border-t border-[var(--color-line)]" />
 
-        <h1 className="mt-12 text-[64px] leading-none tracking-[-0.025em] font-medium">
-          codex
-        </h1>
-        <p className="mt-5 text-[14px] leading-relaxed text-[var(--color-ink-soft)] max-w-[42ch]">
-          a personal index. a quiet shelf for notes, guides, resources, ideas,
-          studies, and the technologies you keep returning to.
+        <h1 className="mt-12 text-[64px] leading-none font-medium tracking-[-0.025em]">codex</h1>
+        <p className="mt-5 max-w-[42ch] text-[14px] leading-relaxed text-[var(--color-ink-soft)]">
+          a personal index. a quiet shelf for notes, guides, resources, ideas, studies, and the
+          technologies you keep returning to.
         </p>
         <p className="mt-2 text-[11px] tracking-[0.16em] text-[var(--color-muted)]">
           <span>{total}</span>
@@ -49,19 +57,19 @@ export default function Home() {
       </header>
 
       {/* Search */}
-      <section className="mt-14 rise" style={{ animationDelay: "120ms" }}>
+      <section className="rise mt-14" style={{ animationDelay: "120ms" }}>
         <SearchBar entries={all} />
       </section>
 
       {/* Recent */}
-      <section className="mt-20 rise" style={{ animationDelay: "240ms" }}>
+      <section className="rise mt-20" style={{ animationDelay: "240ms" }}>
         <SectionHeading label="recent" />
         <ol className="mt-6 space-y-1">
           {recent.map((m, i) => (
             <li key={m.slug}>
               <Link
                 href={`/entry/${m.slug}`}
-                className="group grid grid-cols-[2.25rem_1fr_auto] items-baseline gap-x-4 px-2 -mx-2 py-2.5 rounded-[2px] transition-colors hover:bg-[var(--color-paper-soft)]"
+                className="group -mx-2 grid grid-cols-[2.25rem_1fr_auto] items-baseline gap-x-4 rounded-[2px] px-2 py-2.5 transition-colors hover:bg-[var(--color-paper-soft)]"
               >
                 <span
                   data-keep-case
@@ -69,15 +77,15 @@ export default function Home() {
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="flex flex-col gap-0.5 min-w-0">
-                  <span className="text-[15px] truncate transition-colors group-hover:text-[var(--color-seal)]">
+                <span className="flex min-w-0 flex-col gap-0.5">
+                  <span className="truncate text-[15px] transition-colors group-hover:text-[var(--color-seal)]">
                     {m.title}
                   </span>
                   <span className="text-[11px] tracking-[0.06em] text-[var(--color-muted)]">
                     {m.category} · {fmtDate(m.date)}
                   </span>
                 </span>
-                <span className="text-[var(--color-muted-soft)] group-hover:text-[var(--color-seal)] transition-colors text-sm select-none">
+                <span className="text-sm text-[var(--color-muted-soft)] transition-colors select-none group-hover:text-[var(--color-seal)]">
                   →
                 </span>
               </Link>
@@ -87,25 +95,22 @@ export default function Home() {
       </section>
 
       {/* Browse */}
-      <section className="mt-20 rise" style={{ animationDelay: "360ms" }}>
+      <section className="rise mt-20" style={{ animationDelay: "360ms" }}>
         <SectionHeading label="browse" />
-        <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-1">
+        <ul className="mt-6 grid grid-cols-1 gap-x-10 gap-y-1 sm:grid-cols-2">
           {CATEGORIES.map((c) => {
             const n = counts[c.key];
             return (
               <li key={c.key}>
-                <Link
-                  href={`/?cat=${c.plural}`}
-                  className="group flex items-baseline gap-3 py-2.5"
-                >
-                  <span className="text-[var(--color-muted)] w-3 text-center select-none transition-colors group-hover:text-[var(--color-seal)]">
+                <Link href={`/?cat=${c.plural}`} className="group flex items-baseline gap-3 py-2.5">
+                  <span className="w-3 text-center text-[var(--color-muted)] transition-colors select-none group-hover:text-[var(--color-seal)]">
                     <CategoryMark category={c.key} size={14} />
                   </span>
                   <span className="text-[14px] transition-colors group-hover:text-[var(--color-seal)]">
                     {c.plural}
                   </span>
-                  <span className="flex-1 leader self-end h-3" aria-hidden />
-                  <span className="text-[12px] tabular-nums text-[var(--color-muted)] group-hover:text-[var(--color-ink)] transition-colors">
+                  <span className="leader h-3 flex-1 self-end" aria-hidden />
+                  <span className="text-[12px] text-[var(--color-muted)] tabular-nums transition-colors group-hover:text-[var(--color-ink)]">
                     {String(n).padStart(2, "0")}
                   </span>
                 </Link>
@@ -117,7 +122,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer
-        className="mt-28 pt-6 border-t border-[var(--color-line)] flex items-baseline justify-between text-[10px] tracking-[0.18em] text-[var(--color-muted)] rise"
+        className="rise mt-28 flex items-baseline justify-between border-t border-[var(--color-line)] pt-6 text-[10px] tracking-[0.18em] text-[var(--color-muted)]"
         style={{ animationDelay: "480ms" }}
       >
         <span>§ lucas · codex</span>
@@ -130,10 +135,8 @@ export default function Home() {
 function SectionHeading({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="text-[11px] tracking-[0.22em] text-[var(--color-muted)]">
-        {label}
-      </span>
-      <span className="flex-1 h-px bg-[var(--color-line)]" />
+      <span className="text-[11px] tracking-[0.22em] text-[var(--color-muted)]">{label}</span>
+      <span className="h-px flex-1 bg-[var(--color-line)]" />
     </div>
   );
 }

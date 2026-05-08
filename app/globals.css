@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-mono: "JetBrainsMono Nerd Font", "JetBrainsMonoNL Nerd Font",
-    "JetBrains Mono", ui-monospace, "SFMono-Regular", "Menlo", "Consolas",
-    monospace;
+  --font-mono:
+    "JetBrainsMono Nerd Font", "JetBrainsMonoNL Nerd Font", "JetBrains Mono", ui-monospace,
+    "SFMono-Regular", "Menlo", "Consolas", monospace;
 
   --color-paper: #efeae0;
   --color-paper-soft: #f6f2e9;
@@ -33,7 +33,11 @@
     background: var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-mono);
-    font-feature-settings: "calt" 1, "ss01" 1, "liga" 1, "zero" 1;
+    font-feature-settings:
+      "calt" 1,
+      "ss01" 1,
+      "liga" 1,
+      "zero" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: geometricPrecision;
@@ -43,16 +47,8 @@
     text-transform: lowercase;
     min-height: 100vh;
     background-image:
-      radial-gradient(
-        ellipse 80% 50% at 50% -20%,
-        rgba(122, 61, 31, 0.04),
-        transparent 60%
-      ),
-      radial-gradient(
-        ellipse 60% 40% at 100% 100%,
-        rgba(26, 24, 20, 0.03),
-        transparent 60%
-      );
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(122, 61, 31, 0.04), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(26, 24, 20, 0.03), transparent 60%);
   }
 
   code,
@@ -92,11 +88,7 @@
   }
 
   .leader {
-    background-image: radial-gradient(
-      circle,
-      var(--color-line) 1px,
-      transparent 1px
-    );
+    background-image: radial-gradient(circle, var(--color-line) 1px, transparent 1px);
     background-size: 6px 100%;
     background-repeat: repeat-x;
     background-position: 0 70%;
@@ -284,16 +276,8 @@ html[data-theme="ink"] {
 
 html[data-theme="ink"] body {
   background-image:
-    radial-gradient(
-      ellipse 80% 50% at 50% -20%,
-      rgba(214, 138, 85, 0.08),
-      transparent 60%
-    ),
-    radial-gradient(
-      ellipse 60% 40% at 100% 100%,
-      rgba(239, 234, 224, 0.04),
-      transparent 60%
-    );
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(214, 138, 85, 0.08), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(239, 234, 224, 0.04), transparent 60%);
 }
 
 html[data-theme="ink"] .grain::before {
