@@ -368,3 +368,24 @@ html[data-density="loose"] .prose-codex p,
 html[data-density="loose"] .prose-codex li {
   line-height: 1.95;
 }
+
+/* ───────── settings: symbols (glyph default, icon alt) ───────── */
+.category-mark .mark-glyph {
+  display: inline;
+  line-height: 1;
+}
+
+.category-mark .mark-icon {
+  display: none;
+  line-height: 0;
+}
+
+html[data-symbols="icon"] .category-mark .mark-glyph {
+  display: none;
+}
+
+html[data-symbols="icon"] .category-mark .mark-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

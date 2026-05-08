@@ -4,14 +4,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Fuse from "fuse.js";
 import type { EntryMeta } from "@/lib/types";
-import { CATEGORIES } from "@/lib/types";
+import CategoryMark from "@/components/CategoryMark";
 
 interface Props {
   entries: EntryMeta[];
 }
-
-const glyphFor = (cat: string) =>
-  CATEGORIES.find((c) => c.key === cat)?.glyph ?? "·";
 
 export default function SearchBar({ entries }: Props) {
   const [query, setQuery] = useState("");
@@ -132,7 +129,7 @@ export default function SearchBar({ entries }: Props) {
                     }`}
                   >
                     <span className="text-[var(--color-muted)] w-4 text-center select-none">
-                      {glyphFor(r.category)}
+                      <CategoryMark category={r.category} size={14} />
                     </span>
                     <span className="flex-1 truncate text-[14px]">
                       {r.title}

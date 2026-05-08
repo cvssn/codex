@@ -7,6 +7,7 @@ type Toggle = "on" | "off";
 type Motion = "full" | "reduced";
 type Contrast = "normal" | "high";
 type Density = "compact" | "regular" | "loose";
+type Symbols = "glyph" | "icon";
 
 interface Settings {
   theme: Theme;
@@ -14,6 +15,7 @@ interface Settings {
   motion: Motion;
   contrast: Contrast;
   density: Density;
+  symbols: Symbols;
 }
 
 const DEFAULTS: Settings = {
@@ -22,6 +24,7 @@ const DEFAULTS: Settings = {
   motion: "full",
   contrast: "normal",
   density: "regular",
+  symbols: "glyph",
 };
 
 const STORAGE_KEY = "codex:settings";
@@ -34,6 +37,7 @@ function applyToDom(s: Settings) {
   h.dataset.motion = s.motion;
   h.dataset.contrast = s.contrast;
   h.dataset.density = s.density;
+  h.dataset.symbols = s.symbols;
 }
 
 function loadSettings(): Settings {
@@ -169,6 +173,20 @@ export default function SettingsPanel() {
                       { value: "compact", label: "compact" },
                       { value: "regular", label: "regular" },
                       { value: "loose", label: "loose" },
+                    ]}
+                  />
+                </Row>
+
+                <Row
+                  label="symbols"
+                  hint="glyph uses geometric shapes. icon uses minimal line art."
+                >
+                  <Segmented
+                    value={settings.symbols}
+                    onChange={(v) => update("symbols", v as Symbols)}
+                    options={[
+                      { value: "glyph", label: "glyph" },
+                      { value: "icon", label: "icon" },
                     ]}
                   />
                 </Row>

@@ -16,6 +16,7 @@ try {
   h.dataset.motion = s.motion || 'full';
   h.dataset.contrast = s.contrast || 'normal';
   h.dataset.density = s.density || 'regular';
+  h.dataset.symbols = s.symbols || 'glyph';
 } catch(e){}
 `;
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllMeta, getEntryBySlug } from "@/lib/content";
-import { CATEGORIES } from "@/lib/types";
+import CategoryMark from "@/components/CategoryMark";
 
 export async function generateStaticParams() {
   return getAllMeta().map((m) => ({ slug: m.slug }));
@@ -20,9 +20,6 @@ function fmtDate(iso: string): string {
   const month = MONTHS_LONG[parseInt(mo, 10) - 1] ?? mo;
   return `${parseInt(d, 10)} ${month} ${y}`;
 }
-
-const glyphFor = (cat: string) =>
-  CATEGORIES.find((c) => c.key === cat)?.glyph ?? "·";
 
 export default async function EntryPage({
   params,
@@ -51,7 +48,7 @@ export default async function EntryPage({
       <article className="mt-14 rise">
         <div className="flex items-center gap-3 text-[11px] tracking-[0.16em] text-[var(--color-muted)]">
           <span className="text-[var(--color-seal)] select-none">
-            {glyphFor(entry.category)}
+            <CategoryMark category={entry.category} size={14} />
           </span>
           <span>{entry.category}</span>
           <span>·</span>

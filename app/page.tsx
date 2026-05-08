@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
+import CategoryMark from "@/components/CategoryMark";
 import { getAllMeta, getCountsByCategory } from "@/lib/content";
 import { CATEGORIES } from "@/lib/types";
 
@@ -98,7 +99,7 @@ export default function Home() {
                   className="group flex items-baseline gap-3 py-2.5"
                 >
                   <span className="text-[var(--color-muted)] w-3 text-center select-none transition-colors group-hover:text-[var(--color-seal)]">
-                    {c.glyph}
+                    <CategoryMark category={c.key} size={14} />
                   </span>
                   <span className="text-[14px] transition-colors group-hover:text-[var(--color-seal)]">
                     {c.plural}
