@@ -18,7 +18,8 @@
     "remark-gfm": "^4.0.0",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.1",
-    "unified": "^11.0.5"
+    "unified": "^11.0.5",
+    "vercel": "^53.2.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",

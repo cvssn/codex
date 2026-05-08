@@ -13,7 +13,9 @@
       "Bash(netstat -ano)",
       "PowerShell(Get-NetTCPConnection *)",
       "Bash(npm run *)",
-      "Bash(curl *)"
+      "Bash(curl *)",
+      "Bash(kill bhjhapb7l *)",
+      "Bash(vercel --version)"
     ]
   }
 }
