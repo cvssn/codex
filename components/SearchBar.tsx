@@ -111,7 +111,8 @@ export default function SearchBar({ entries }: Props) {
       </label>
 
       {open && query.trim().length > 0 && (
-        <div className="absolute left-0 right-0 top-full mt-3 border border-[var(--color-line)] bg-[var(--color-paper-soft)] shadow-[0_18px_40px_-20px_rgba(26,24,20,0.25)] z-20 fade">
+        <div className="absolute left-0 right-0 top-full mt-3 border border-[var(--color-ink-soft)] bg-[#fbf7ec] shadow-[0_24px_48px_-16px_rgba(26,24,20,0.55)] z-50 fade"
+             style={{ backgroundColor: "#fbf7ec", opacity: 1 }}>
           {results.length === 0 ? (
             <div className="px-5 py-6 text-sm text-[var(--color-muted)] flex items-center gap-3">
               <span>·</span>
@@ -126,8 +127,8 @@ export default function SearchBar({ entries }: Props) {
                     onMouseEnter={() => setActiveIdx(i)}
                     className={`flex items-baseline gap-3 px-5 py-3 transition-colors ${
                       i === activeIdx
-                        ? "bg-[var(--color-paper-deep)]"
-                        : "hover:bg-[var(--color-paper-deep)]"
+                        ? "bg-[#d9d2c0] text-[var(--color-ink)]"
+                        : "hover:bg-[#e6e0d2]"
                     }`}
                   >
                     <span className="text-[var(--color-muted)] w-4 text-center select-none">

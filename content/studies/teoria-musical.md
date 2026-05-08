@@ -109,8 +109,6 @@ summary: meus estudos pessoais sobre teoria musical
 
 **teoria musical** (ou teoria da música) é o estudo de toda a estrutura ou sistema que forma a música nos aspectos de melodia, harmonia e ritmo, incluindo os métodos destinados a analisar, classificar, compor e compreender música.
 
----
-
 ## 1.1 - o que é música?
 
 de uma maneira mais didática e abrangente, a música é composta por melodia, harmonia e ritmo.
@@ -128,3 +126,21 @@ melodia é a voz principal do som, é aquilo que pode ser cantado.
 ### ritmo
 
 **ritmo** é a marcação do tempo de uma música. assim como o relógio marca as horas, o ritmo nos diz como acompanhar a música.
+
+## 1.2 - notas musicais
+
+**Notas musicais** são os elementos mínimos de um som. Quando uma corda vibra, ela movimenta as moléculas de ar ao seu redor. Essa agitação das moléculas ocorre na mesma frequência de vibração da corda. O ouvido humano capta essa vibração do ar e a processa atribuindo um som ao cérebro. para cada frequência de vibração, o cérebro atribui um som diferente (uma **nota** diferente).
+
+### como representar as notas musicais?
+
+As notas musicais podem ser identificadas por letras para facilitar a escrita e aumentar a velocidade de leitura. A notação utilizada é universal, o que facilita a comunicação com músicos de outros países. Existem 7 letras para representar as notas musicais. A definição das letras e suas notas correspondentes é a seguinte:
+
+| letra | nota |
+|-------|------|
+| c     | dó   |
+| d     | ré   |
+| e     | mi   |
+| f     | fá   |
+| g     | sol  |
+| a     | lá   |
+| b     | si   |
