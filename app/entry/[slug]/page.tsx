@@ -1,11 +1,49 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllMeta, getEntryBySlug } from "@/lib/content";
 import CategoryMark from "@/components/CategoryMark";
 import Toc from "@/components/Toc";
+import { SITE_AUTHOR, SITE_NAME } from "@/lib/site";
 
 export async function generateStaticParams() {
   return getAllMeta().map((m) => ({ slug: m.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const entry = await getEntryBySlug(slug);
+  if (!entry) return {};
+
+  const url = `/entry/${slug}`;
+  const description = entry.summary || `${entry.category} — ${SITE_NAME}`;
+
+  return {
+    title: entry.title,
+    description,
+    keywords: entry.tags.length ? entry.tags : undefined,
+    authors: [{ name: SITE_AUTHOR }],
+    alternates: { canonical: url },
+    openGraph: {
+      title: entry.title,
+      description,
+      type: "article",
+      url,
+      siteName: SITE_NAME,
+      publishedTime: entry.date || undefined,
+      tags: entry.tags,
+      authors: [SITE_AUTHOR],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: entry.title,
+      description,
+    },
+  };
 }
 
 const MONTHS_LONG = [
