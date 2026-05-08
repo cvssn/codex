@@ -2,8 +2,8 @@
 
 @theme {
   --font-mono:
-    "JetBrainsMono Nerd Font", "JetBrainsMonoNL Nerd Font", "JetBrains Mono", ui-monospace,
-    "SFMono-Regular", "Menlo", "Consolas", monospace;
+    "JetBrainsMono Nerd Font", "JetBrainsMonoNL Nerd Font", var(--font-jetbrains-mono),
+    "JetBrains Mono", ui-monospace, "SFMono-Regular", "Menlo", "Consolas", monospace;
 
   --color-paper: #efeae0;
   --color-paper-soft: #f6f2e9;
