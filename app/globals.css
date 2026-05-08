@@ -264,3 +264,107 @@
 .fade {
   animation: fade 800ms ease-out both;
 }
+
+/* ───────── settings: theme = ink (dark) ───────── */
+html[data-theme="ink"] {
+  color-scheme: dark;
+  --color-paper: #1a1814;
+  --color-paper-soft: #231f1a;
+  --color-paper-deep: #2a251f;
+  --color-paper-raised: #2f2a23;
+  --color-paper-active: #3f382d;
+  --color-ink: #efeae0;
+  --color-ink-soft: #c9c2b3;
+  --color-muted: #8a8478;
+  --color-muted-soft: #6b6558;
+  --color-line: #3a342b;
+  --color-line-soft: #2a251f;
+  --color-seal: #d68a55;
+}
+
+html[data-theme="ink"] body {
+  background-image:
+    radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      rgba(214, 138, 85, 0.08),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 100% 100%,
+      rgba(239, 234, 224, 0.04),
+      transparent 60%
+    );
+}
+
+html[data-theme="ink"] .grain::before {
+  opacity: 0.05;
+  mix-blend-mode: screen;
+}
+
+/* ───────── settings: grain off ───────── */
+html[data-grain="off"] body.grain::before {
+  display: none;
+}
+
+/* ───────── settings: motion reduced ───────── */
+html[data-motion="reduced"] .rise,
+html[data-motion="reduced"] .fade {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  transition-duration: 0ms !important;
+  animation-duration: 0ms !important;
+}
+
+/* ───────── settings: contrast high ───────── */
+html[data-contrast="high"] {
+  --color-ink-soft: #1a1814;
+  --color-muted: #4a443a;
+  --color-muted-soft: #6a6458;
+  --color-line: #8a8478;
+  --color-line-soft: #b0a99a;
+}
+
+html[data-contrast="high"][data-theme="ink"] {
+  --color-ink-soft: #efeae0;
+  --color-muted: #d0c9bc;
+  --color-muted-soft: #a9a294;
+  --color-line: #6b6558;
+  --color-line-soft: #4a443a;
+}
+
+/* ───────── settings: density ───────── */
+html[data-density="compact"] body {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+html[data-density="regular"] body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+html[data-density="loose"] body {
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+html[data-density="compact"] main {
+  padding-top: 4rem;
+  padding-bottom: 6rem;
+}
+
+html[data-density="loose"] main {
+  padding-top: 6rem;
+  padding-bottom: 10rem;
+}
+
+html[data-density="loose"] .prose-codex p,
+html[data-density="loose"] .prose-codex li {
+  line-height: 1.95;
+}
