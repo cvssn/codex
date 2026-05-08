@@ -6,11 +6,56 @@ import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
-import type { Category, Entry, EntryMeta } from "./types";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeShiki from "@shikijs/rehype";
+import { visit } from "unist-util-visit";
+import type { Element, Root, ElementContent } from "hast";
+import type { Category, Entry, EntryMeta, Heading } from "./types";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
-const processor = unified().use(remarkParse).use(remarkGfm).use(remarkRehype).use(rehypeStringify);
+function rehypeCollectHeadings(headings: Heading[]) {
+  return (tree: Root) => {
+    visit(tree, "element", (node: Element) => {
+      const m = /^h([1-6])$/.exec(node.tagName);
+      if (!m) return;
+      const depth = Number(m[1]);
+      if (depth < 2 || depth > 3) return;
+      const id = (node.properties?.id as string) || "";
+      const text = collectText(node.children).trim();
+      if (id && text) headings.push({ id, text, depth });
+    });
+  };
+}
+
+function collectText(children: ElementContent[]): string {
+  let out = "";
+  for (const c of children) {
+    if (c.type === "text") out += c.value;
+    else if (c.type === "element") out += collectText(c.children);
+  }
+  return out;
+}
+
+function buildProcessor(headings: Heading[]) {
+  return unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkRehype)
+    .use(rehypeSlug)
+    .use(rehypeCollectHeadings, headings)
+    .use(rehypeAutolinkHeadings, {
+      behavior: "wrap",
+      properties: { className: ["heading-anchor"], ariaLabel: "link to section" },
+    })
+    .use(rehypeShiki, {
+      themes: { light: "vitesse-light", dark: "vitesse-dark" },
+      defaultColor: false,
+      cssVariablePrefix: "--shiki-",
+    })
+    .use(rehypeStringify);
+}
 
 function listMarkdownFiles(dir: string): string[] {
   if (!fs.existsSync(dir)) return [];
@@ -66,8 +111,9 @@ export async function getEntryBySlug(slug: string): Promise<Entry | null> {
   for (const file of files) {
     const { meta, body } = parseFile(file);
     if (meta.slug === slug) {
-      const html = String(await processor.process(body));
-      return { ...meta, body, html };
+      const headings: Heading[] = [];
+      const html = String(await buildProcessor(headings).process(body));
+      return { ...meta, body, html, headings };
     }
   }
   return null;

@@ -18,7 +18,14 @@ export interface EntryMeta {
   summary: string;
 }
 
+export interface Heading {
+  id: string;
+  text: string;
+  depth: number;
+}
+
 export interface Entry extends EntryMeta {
   body: string;
   html: string;
+  headings: Heading[];
 }

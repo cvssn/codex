@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllMeta, getEntryBySlug } from "@/lib/content";
 import CategoryMark from "@/components/CategoryMark";
+import Toc from "@/components/Toc";
 
 export async function generateStaticParams() {
   return getAllMeta().map((m) => ({ slug: m.slug }));
@@ -78,6 +79,8 @@ export default async function EntryPage({ params }: { params: Promise<{ slug: st
             ))}
           </ul>
         )}
+
+        <Toc headings={entry.headings} />
 
         <hr className="mt-10 border-0 border-t border-[var(--color-line)]" />
 
