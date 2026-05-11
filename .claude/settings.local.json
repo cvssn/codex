@@ -18,7 +18,10 @@
       "Bash(vercel --version)",
       "Bash(npx prettier *)",
       "Bash(npx eslint *)",
-      "Bash(npm ls *)"
+      "Bash(npm ls *)",
+      "mcp__plugin_context-mode_context-mode__ctx_execute_file",
+      "Bash(npx tsc *)",
+      "Bash(xargs grep -l \"Appearance\\\\b\")"
     ]
   }
 }

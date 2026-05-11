@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import SettingsPanel from "@/components/SettingsPanel";
 import { SITE_DESCRIPTION, SITE_NAME, getSiteUrl } from "@/lib/site";
+import { clerkAppearance } from "@/lib/clerk-appearance";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -53,14 +55,16 @@ try {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={jetbrainsMono.variable}>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: initSettingsScript }} />
-      </head>
-      <body className="grain">
-        {children}
-        <SettingsPanel />
-      </body>
-    </html>
+    <ClerkProvider appearance={clerkAppearance} afterSignOutUrl="/">
+      <html lang="en" className={jetbrainsMono.variable}>
+        <head>
+          <script dangerouslySetInnerHTML={{ __html: initSettingsScript }} />
+        </head>
+        <body className="grain">
+          {children}
+          <SettingsPanel />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

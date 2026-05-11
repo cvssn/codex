@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Show, UserButton } from "@clerk/nextjs";
 import SearchBar from "@/components/SearchBar";
 import CategoryMark from "@/components/CategoryMark";
 import { getAllMeta, getCountsByCategory } from "@/lib/content";
@@ -40,7 +41,33 @@ export default function Home() {
       <header className="rise" style={{ animationDelay: "0ms" }}>
         <div className="flex items-baseline justify-between text-[11px] tracking-[0.18em] text-[var(--color-muted)]">
           <span>§ codex</span>
-          <span data-keep-case>v0.1</span>
+          <div className="flex items-center gap-4">
+            <Show when="signed-out">
+              <Link
+                href="/sign-in"
+                className="transition-colors hover:text-[var(--color-seal)]"
+              >
+                sign in
+              </Link>
+              <span aria-hidden className="text-[var(--color-line)]">·</span>
+              <Link
+                href="/sign-up"
+                className="transition-colors hover:text-[var(--color-seal)]"
+              >
+                sign up
+              </Link>
+            </Show>
+            <Show when="signed-in">
+              <Link
+                href="/admin"
+                className="transition-colors hover:text-[var(--color-seal)]"
+              >
+                admin
+              </Link>
+              <UserButton />
+            </Show>
+            <span data-keep-case>v0.1</span>
+          </div>
         </div>
         <hr className="mt-3 border-0 border-t border-[var(--color-line)]" />
 

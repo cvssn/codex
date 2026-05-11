@@ -12,6 +12,7 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@clerk/nextjs": "^7.3.3",
     "@shikijs/rehype": "^1.29.2",
     "fuse.js": "^7.0.0",
     "gray-matter": "^4.0.3",
