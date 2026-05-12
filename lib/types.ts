@@ -29,3 +29,16 @@ export interface Entry extends EntryMeta {
   html: string;
   headings: Heading[];
 }
+
+export interface Photo {
+  id: string;
+  url: string;
+  pathname: string;
+  title: string;
+  caption: string;
+  dateTaken: string;
+  location: string;
+  postedAt: string;
+  width?: number;
+  height?: number;
+}

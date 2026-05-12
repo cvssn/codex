@@ -147,10 +147,33 @@ export default function Home() {
         </ul>
       </section>
 
+      {/* Photographs */}
+      <section className="rise mt-20" style={{ animationDelay: "440ms" }}>
+        <SectionHeading label="elsewhere" />
+        <Link
+          href="/photographs"
+          className="group mt-6 -mx-2 flex items-baseline gap-3 rounded-[2px] px-2 py-3 transition-colors hover:bg-[var(--color-paper-soft)]"
+        >
+          <span
+            aria-hidden
+            className="w-3 text-center text-[var(--color-muted)] transition-colors select-none group-hover:text-[var(--color-seal)]"
+          >
+            ◐
+          </span>
+          <span className="text-[14px] transition-colors group-hover:text-[var(--color-seal)]">
+            photographs
+          </span>
+          <span className="leader h-3 flex-1 self-end" aria-hidden />
+          <span className="text-[11px] tracking-[0.16em] text-[var(--color-muted)] transition-colors group-hover:text-[var(--color-seal)]">
+            shelf →
+          </span>
+        </Link>
+      </section>
+
       {/* Footer */}
       <footer
         className="rise mt-28 flex items-baseline justify-between border-t border-[var(--color-line)] pt-6 text-[10px] tracking-[0.18em] text-[var(--color-muted)]"
-        style={{ animationDelay: "480ms" }}
+        style={{ animationDelay: "560ms" }}
       >
         <span>§ lucas · codex</span>
         <span data-keep-case>2026</span>
